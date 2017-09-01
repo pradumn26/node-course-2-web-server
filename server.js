@@ -1,7 +1,7 @@
 const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
-
+const port = process.env.PORT || 3000;
 var app = express();
 
 hbs.registerPartials(__dirname + '/views/partials');
@@ -13,12 +13,12 @@ hbs.registerHelper('screamIt' , (text) => {
   return text.toUpperCase();
 });
 
-app.use((req , res , next) => {
-  res.render('maintanence.hbs' , {
-    pageTitle: 'We will be back',
-    message: 'Under maintanence'
-  });
-});
+// app.use((req , res , next) => {
+//   res.render('maintanence.hbs' , {
+//     pageTitle: 'We will be back',
+//     message: 'Under maintanence'
+//   });
+// });
 app.use((req , res ,next) => {
   var now = new Date().toString();
   var log = now + req.method + req.url + '';
@@ -48,4 +48,4 @@ app.get('/bad' , (req , res) => {
   });
 });
 
-app.listen(3000);
+app.listen(port);
